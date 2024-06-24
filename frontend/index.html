@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Silvia</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Smart Silvia</h1>
+    <div class="button-container">
+        <button onclick="controlMachine('on')">Turn On</button>
+        <button onclick="controlMachine('off')">Turn Off</button>
+    </div>
+    <div>
+        <label for="mode">Mode: </label>
+        <select id="mode" name="mode" onchange="setMode()">
+            <option value="coffee">Coffee</option>
+            <option value="steam">Steam</option>
+        </select>
+    </div>
+    <div id="statusMessage">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText" class="status-text">Status: Loading...</span>
+    </div>
+    <div id="currentTemp">
+        Current Temperature: <span id="temperature">0</span>°C
+        <span id="tempStatusDot" class="status-dot orange-dot"></span>
+    </div>
+    <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
+    <button onclick="openSetTemperaturePage()">Set Temperature</button>
+    <canvas id="tempChart" width="400" height="200"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
