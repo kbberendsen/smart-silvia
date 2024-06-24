@@ -1,78 +1,54 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    padding: 20px;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
+    box-sizing: border-box;
 }
 
 h1 {
-    color: #333;
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .button-container {
     display: flex;
-    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
+.button-container button {
+    padding: 15px 30px;
+    margin: 5px;
+    font-size: 1.2em;
     cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
+#modeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-div {
-    margin-bottom: 20px;
-}
-
-label {
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-input[type="range"], input[type="number"] {
-    width: 80%;
-    max-width: 300px;
+#mode {
+    margin-left: 10px;
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    font-size: 1.2em;
 }
 
 #statusMessage {
-    font-size: 14px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
 }
 
 .status-dot {
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     border-radius: 50%;
     display: inline-block;
-    margin-left: 5px;
-}
-
-.red-dot {
-    background-color: red;
+    margin-right: 10px;
 }
 
 .green-dot {
@@ -83,10 +59,133 @@ input[type="range"], input[type="number"] {
     background-color: orange;
 }
 
-.status-text.red-text {
-    color: red;
+.red-dot {
+    background-color: red;
 }
 
-.status-text.green-text {
-    color: green;
+.status-text {
+    vertical-align: middle;
+    font-size: 1.2em;
+}
+
+#currentTemp, #targetTemp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 1.4em;
+}
+
+#tempStatusDot {
+    margin-left: 10px;
+}
+
+button {
+    padding: 15px 30px;
+    margin-top: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+canvas {
+    margin-top: 20px;
+    max-width: 100%;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    h1 {
+        font-size: 2em;
+        text-align: left;
+        width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .button-container button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #modeContainer, #statusMessage, #currentTemp, #targetTemp, #buttonContainer {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #modeContainer {
+        margin-bottom: 10px;
+    }
+
+    #currentTemp, #targetTemp {
+        font-size: 1.6em;
+    }
+
+    .status-text {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        text-align: left;
+        width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .button-container button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #modeContainer, #statusMessage, #currentTemp, #targetTemp, #buttonContainer {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #modeContainer {
+        margin-bottom: 10px;
+    }
+
+    .status-dot {
+        height: 10px;
+        width: 10px;
+    }
+
+    #currentTemp, #targetTemp {
+        font-size: 1.4em;
+    }
+
+    .status-text {
+        font-size: 1.4em;
+    }
+
+    #buttonContainer {
+        justify-content: center;
+    }
 }
