@@ -82,7 +82,7 @@ button:hover {
     }
 
     h1 {
-        font-size: 2rem; /* Adjust font size for headings */
+        font-size: 4rem; /* Increase font size for headings */
     }
 
     .button-container,
@@ -95,34 +95,22 @@ button:hover {
     }
 
     button {
-        width: 100%; /* Make buttons full-width on mobile */
-        padding: 15px 25px; /* Adjust padding for buttons on mobile */
-        font-size: 1.2rem; /* Adjust font size for buttons */
+        width: 80%;
+        padding: 30px 50px; /* Increase padding for buttons on mobile */
+        font-size: 4rem; /* Increase font size for buttons */
     }
 
     .status-text {
-        font-size: 1.2rem; /* Adjust font size for status text */
+        font-size: 4rem; /* Increase font size for status text */
     }
 
     canvas {
         width: 100%;
         height: auto;
     }
-}
-
-/* Responsive design for phones (smaller than 600px) */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.8rem; /* Further adjust font size for headings */
-    }
-
-    button {
-        padding: 10px 20px; /* Adjust padding for buttons */
-        font-size: 1rem; /* Adjust font size for buttons */
-    }
 
     .status-text {
-        font-size: 1rem; /* Adjust font size for status text */
+        font-size: 4rem; /* Increase font size for status text */
     }
 }
 
