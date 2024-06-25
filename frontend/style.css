@@ -74,15 +74,15 @@ button:hover {
     color: red;
 }
 
-/* Responsive design */
-@media (max-width: 1000px) and (max-height: 500px) {
+/* Responsive design for tablets and smaller screens */
+@media (max-width: 1000px) {
     body {
         padding: 20px; /* Increase padding for better spacing on small screens */
         justify-content: flex-start; /* Align content to the top */
     }
 
     h1 {
-        font-size: 3rem; /* Further increase font size for headings */
+        font-size: 2rem; /* Adjust font size for headings */
     }
 
     .button-container,
@@ -96,12 +96,12 @@ button:hover {
 
     button {
         width: 100%; /* Make buttons full-width on mobile */
-        padding: 20px 40px; /* Increase padding for buttons on mobile */
-        font-size: 2rem; /* Increase font size for buttons */
+        padding: 15px 25px; /* Adjust padding for buttons on mobile */
+        font-size: 1.2rem; /* Adjust font size for buttons */
     }
 
     .status-text {
-        font-size: 2rem; /* Increase font size for status text */
+        font-size: 1.2rem; /* Adjust font size for status text */
     }
 
     canvas {
@@ -110,9 +110,38 @@ button:hover {
     }
 }
 
+/* Responsive design for phones (smaller than 600px) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Further adjust font size for headings */
+    }
+
+    button {
+        padding: 10px 20px; /* Adjust padding for buttons */
+        font-size: 1rem; /* Adjust font size for buttons */
+    }
+
+    .status-text {
+        font-size: 1rem; /* Adjust font size for status text */
+    }
+}
+
 /* Desktop styles */
 @media (min-width: 1001px) {
     body {
         margin-top: 50px; /* Increase top margin for desktop */
+    }
+
+    h1 {
+        font-size: 3rem; /* Increase font size for headings on desktop */
+    }
+
+    button {
+        padding: 20px 40px; /* Increase padding for buttons */
+        font-size: 1.5rem; /* Increase font size for buttons */
+    }
+
+    .status-text {
+        font-size: 1.5rem; /* Increase font size for status text */
     }
 }
