@@ -2,6 +2,48 @@ import network
 import asyncio
 from machine_control import handle_request, pid_loop
 
+# HTML content with external CSS and JS from GitHub
+html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Silvia</title>
+    <link rel="stylesheet" href="https://kbberendsen.github.io/smart-silvia/frontend/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kbberendsen.github.io/smart-silvia/frontend/script.js"></script>
+</head>
+<body>
+    <h1>Smart Silvia</h1>
+    <div class="button-container">
+        <button onclick="controlMachine('on')">Turn On</button>
+        <button onclick="controlMachine('off')">Turn Off</button>
+    </div>
+    <div id="modeContainer">
+        <label for="mode">Mode: </label>
+        <select id="mode" name="mode" onchange="setMode()">
+            <option value="coffee">Coffee</option>
+            <option value="steam">Steam</option>
+        </select>
+    </div>
+    <div id="statusMessage">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText" class="status-text">Status: Loading...</span>
+    </div>
+    <div id="currentTemp">
+        Current Temperature: <span id="temperature">0</span>°C
+        <span id="tempStatusDot" class="status-dot orange-dot"></span>
+    </div>
+    <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
+    <div id="buttonContainer">
+        <button onclick="openSetTemperaturePage()">Set Temperature</button>
+    </div>
+    <canvas id="tempChart" width="400" height="200"></canvas>
+    
+</body>
+</html>
+"""
+
 # Connect to Wi-Fi
 # wlan = network.WLAN(network.STA_IF)
 # wlan.active(True)
@@ -15,9 +57,18 @@ from machine_control import handle_request, pid_loop
 # Serve Web Application
 async def serve_client(reader, writer):
     request = await reader.read(1024)
+    request = request.decode('utf-8')  # Decode the request to string
+    print("Request:", request)  # Debugging line
+
+    # Handle the request
     response = handle_request(request)
     if response is None:
-        response = 'HTTP/1.1 500 Internal Server Error\r\nContent-Type: text/plain; charset=utf-8\r\n\r\nInternal Server Error'.encode('utf-8')
+        # If handle_request returns None, serve the HTML page for root or return 404
+        if request.startswith('GET / ') or request.startswith('GET /index.html '):
+            response = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n{}'.format(html).encode('utf-8')
+        else:
+            response = 'HTTP/1.1 404 Not Found\r\nContent-Type: text/plain; charset=utf-8\r\n\r\nNot Found'.encode('utf-8')
+    
     await writer.write(response)
     await writer.drain()  # Ensure all data is sent
     await writer.close()
