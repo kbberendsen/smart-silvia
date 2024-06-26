@@ -123,13 +123,12 @@ async function setTemperature() {
                 },
                 body: `temperature=${newTemp}`
             });
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(`Failed to set temperature: ${errorMessage}`);
-            }
             const responseBody = await response.text();
+            if (!response.ok) {
+                throw new Error(`Failed to set temperature: ${responseBody}`);
+            }
             console.log('Set temperature response:', responseBody);
-            updateStatus('New temperature set', 'green-dot', 'green-text', 3000);
+            updateStatus('New temperature set', 'green-dot', 'green-text', 3000); // Display message for 3 seconds
             await fetchTargetTemperature(); // Update the target temperature display
         } catch (error) {
             console.error('Error setting temperature:', error);
