@@ -24,15 +24,11 @@ html = """
         <span id="tempStatusDot" class="status-dot orange-dot"></span>
     </div>
     <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
-    <div id="tempSetContainer">
-        <input type="number" id="tempInput" min="90" max="98" placeholder="Set temperature (90-98°C)" required>
+    <div id="tempSetContainer" style="display: flex; flex-direction: column; align-items: center;">
+        <input type="number" id="tempInput" min="90" max="98" placeholder="Set target temperature (90-98°C)" required style="margin-bottom: 10px;">
         <button onclick="setTemperature()">Set Temperature</button>
     </div>
-    <div id="buttonContainer">
-        <button onclick="openSetTemperaturePage()">Other Settings</button>
-    </div>
     <canvas id="tempChart" width="400" height="200"></canvas>
-    
 </body>
 </html>
 """

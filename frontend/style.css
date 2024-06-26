@@ -18,6 +18,21 @@ h1 {
     margin-bottom: 20px; /* Add some space below the heading */
 }
 
+#tempSetContainer {
+    display: flex;
+    flex-direction: column; /* Ensures vertical stacking */
+    align-items: center; /* Centers the items horizontally */
+    margin: 10px;
+}
+
+input[type="number"] {
+    width: 80%; /* Adjust width as needed */
+    padding: 8px;
+    margin-bottom: 10px; /* Space between input and button */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .button-container,
 #modeContainer,
 #statusMessage,

@@ -1,13 +1,22 @@
 let targetTemperature = 0;
 
 // Function to update the status message and dot color
-function updateStatus(text, dotClass, textClass) {
+function updateStatus(text, dotClass, textClass, duration = 0) {
     const statusText = document.getElementById('statusText');
     const statusDot = document.getElementById('statusDot');
     statusText.innerText = text;
     statusText.className = `status-text ${textClass}`; // Apply the color to the text
     statusDot.className = `status-dot ${dotClass}`;
     document.getElementById('statusMessage').classList.remove('hidden');
+
+    // If a duration is specified, reset the status after the duration
+    if (duration > 0) {
+        setTimeout(() => {
+            statusText.innerText = 'Online';
+            statusText.className = 'status-text green-text';
+            statusDot.className = 'status-dot green-dot';
+        }, duration);
+    }
 }
 
 // Function to update the temperature status dot
@@ -104,7 +113,7 @@ async function fetchInitialData() {
 
 // Function to set temperature
 async function setTemperature() {
-    const newTemp = document.getElementById('tempInput').value;
+    const newTemp = parseFloat(document.getElementById('tempInput').value);
     if (newTemp && newTemp >= 90 && newTemp <= 98) {
         try {
             const response = await fetch('/setTemperature', {
