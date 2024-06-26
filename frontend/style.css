@@ -146,11 +146,6 @@ button:hover {
         font-size: 1rem; /* Increase font size for buttons */
     }
 
-    .status-text {
-        font-size: 1rem; /* Increase font size for status text */
-        vertical-align: middle;
-    }
-
     #currentTemp,
     #targetTemp {
         font-size: 1.8rem; /* Increase font size */
