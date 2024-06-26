@@ -42,17 +42,6 @@ function updateTemperatureStatus(currentTemp) {
     }
 }
 
-// Function to check online status
-async function checkOnlineStatus() {
-    try {
-        const response = await fetch('/status');
-        if (!response.ok) throw new Error('Failed to check server status');
-        updateStatus('Online', 'green-dot', 'green-text');
-    } catch (error) {
-        updateStatus('Error: No Internet Connection', 'red-dot', 'red-text');
-    }
-}
-
 // Function to fetch and display the target temperature
 async function fetchTargetTemperature() {
     try {
@@ -105,7 +94,9 @@ async function fetchTemperature() {
     } catch (error) {
         console.error('Error fetching temperature:', error);
         updateTemperatureStatus(null); // Set status to orange dot when temperature cannot be read
-        updateStatus('Error fetching temperature', 'red-dot', 'red-text'); // Always update status to error if fetch fails
+        if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
+            updateStatus('Error fetching temperature', 'red-dot', 'red-text');
+        }
     }
 }
 
@@ -114,9 +105,7 @@ async function initialLoad() {
     try {
         await fetchInitialData();
         updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after initial data fetch
-        setInterval(async () => {
-            await fetchTemperature();
-        }, 1000); // Periodically fetch the temperature every second
+        setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
     } catch (error) {
         console.error('Error during initial load:', error);
         updateStatus('Error during initial load', 'red-dot', 'red-text');
@@ -169,7 +158,4 @@ async function setTemperature() {
 }
 
 // Call initialLoad when the window loads
-window.onload = () => {
-    initialLoad();
-    setInterval(checkOnlineStatus, 1000); // Check online status every second
-};
+window.onload = initialLoad;
