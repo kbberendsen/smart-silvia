@@ -18,21 +18,6 @@ h1 {
     margin-bottom: 20px; /* Add some space below the heading */
 }
 
-#tempSetContainer {
-    display: flex;
-    flex-direction: column; /* Ensures vertical stacking */
-    align-items: center; /* Centers the items horizontally */
-    margin: 10px;
-}
-
-input[type="number"] {
-    width: 80%; /* Adjust width as needed */
-    padding: 8px;
-    margin-bottom: 10px; /* Space between input and button */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
 .button-container,
 #modeContainer,
 #statusMessage,
@@ -63,6 +48,7 @@ button:hover {
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;
+    vertical-align: middle; /* Align vertically with text */
 }
 
 .green-dot {
@@ -110,32 +96,29 @@ button:hover {
     }
 
     button {
-        width: 80%;
-        padding: 30px 50px; /* Increase padding for buttons on mobile */
-        font-size: 1.5rem; /* Increase font size for buttons */
-    }
-
-    canvas {
         width: 100%;
-        height: auto;
-    }
-
-    .status-text {
-        font-size: 2rem; /* Increase font size for status text */
+        padding: 20px 0; /* Adjust padding for better usability on mobile */
+        font-size: 1.8rem; /* Increase font size for buttons */
     }
 
     .status-dot {
         width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 10px;
-        vertical-align: middle; /* Align vertically with text */
+        height: 30px; /* Increase size for better visibility */
     }
 
+    .status-text,
     #currentTemp,
     #targetTemp {
-        font-size: 2rem; /* Increase font size for temperatures */
+        font-size: 2rem; /* Increase font size for better readability */
+    }
+
+    input[type="number"] {
+        width: 80%;
+        padding: 15px;
+        font-size: 1.8rem; /* Increase font size */
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
     }
 }
 
@@ -170,5 +153,14 @@ button:hover {
     #currentTemp,
     #targetTemp {
         font-size: 1.5rem;
+    }
+
+    input[type="number"] {
+        width: 60%;
+        padding: 10px;
+        font-size: 1.2rem; /* Increase font size */
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
     }
 }
