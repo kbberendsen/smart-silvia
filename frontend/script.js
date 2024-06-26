@@ -27,11 +27,6 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
     }
 }
 
-// Add event listener for offline status
-window.addEventListener('offline', () => {
-    updateStatus('Error: No Connection', 'red-dot', 'red-text');
-});
-
 // Function to update the temperature status dot
 function updateTemperatureStatus(currentTemp) {
     const tempStatusDot = document.getElementById('tempStatusDot');
@@ -44,6 +39,17 @@ function updateTemperatureStatus(currentTemp) {
         } else {
             tempStatusDot.className = 'status-dot orange-dot';
         }
+    }
+}
+
+// Function to check online status
+async function checkOnlineStatus() {
+    try {
+        const response = await fetch('/status');
+        if (!response.ok) throw new Error('Failed to check server status');
+        updateStatus('Online', 'green-dot', 'green-text');
+    } catch (error) {
+        updateStatus('Error: No Internet Connection', 'red-dot', 'red-text');
     }
 }
 
@@ -163,4 +169,7 @@ async function setTemperature() {
 }
 
 // Call initialLoad when the window loads
-window.onload = initialLoad;
+window.onload = () => {
+    initialLoad();
+    setInterval(checkOnlineStatus, 1000); // Check online status every second
+};
