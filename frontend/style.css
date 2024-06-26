@@ -100,7 +100,7 @@ button:hover {
     button {
         width: 100%;
         padding: 2rem 0; /* Adjust padding for better usability on mobile */
-        font-size: 3rem; /* Increase font size for buttons */
+        font-size: 2rem; /* Increase font size for buttons */
     }
 
     .status-dot {
@@ -112,7 +112,7 @@ button:hover {
     .status-text{
         font-size: 2rem;
     }
-    
+
     #currentTemp,
     #targetTemp {
         font-size: 3rem; /* Increase font size for better readability */
@@ -121,7 +121,7 @@ button:hover {
     input[type="number"] {
         width: 80%;
         padding: 1.25rem;
-        font-size: 3rem; /* Increase font size */
+        font-size: 2rem; /* Increase font size */
         margin-bottom: 1.25rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
@@ -131,7 +131,7 @@ button:hover {
 /* Desktop styles */
 @media (min-width: 1001px) {
     body {
-        margin-top: 3.125rem; /* Increase top margin for desktop */
+        margin-top: 3rem; /* Increase top margin for desktop */
     }
 
     h1 {
@@ -165,7 +165,7 @@ button:hover {
     input[type="number"] {
         width: 75%;
         padding: 2rem;
-        font-size: 5rem; /* Increase font size */
+        font-size: 1rem; /* Increase font size */
         margin-bottom: 0.625rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
