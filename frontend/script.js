@@ -4,6 +4,7 @@ let targetTemperature = null;
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
+    console.log(`Updating status: ${text}`);
     const statusText = document.getElementById('statusText');
     const statusDot = document.getElementById('statusDot');
     statusText.innerText = text;
@@ -30,6 +31,7 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
 
 // Function to update the temperature status dot
 function updateTemperatureStatus(currentTemp) {
+    console.log(`Updating temperature status: ${currentTemp}`);
     const tempStatusDot = document.getElementById('tempStatusDot');
     if (currentTemp === null) {
         tempStatusDot.className = 'status-dot orange-dot'; // Display orange dot when temperature cannot be read
@@ -160,6 +162,7 @@ async function setTemperature() {
 
 // Network status check
 function checkNetworkStatus() {
+    console.log(`Network status: ${navigator.onLine ? 'online' : 'offline'}`);
     if (!navigator.onLine) {
         updateStatus('Offline', 'red-dot', 'red-text');
     }
@@ -172,5 +175,5 @@ window.addEventListener('offline', () => updateStatus('Offline', 'red-dot', 'red
 // Call initialLoad when the window loads
 window.onload = () => {
     initialLoad();
-    setInterval(checkNetworkStatus, 5000); // Periodically check network status every 5 seconds
+    setInterval(checkNetworkStatus, 2000); // Periodically check network status every 2 seconds
 };
