@@ -10,12 +10,13 @@ body {
     height: 100vh;
     background-color: #f4f4f4;
     text-align: center; /* Center-align text for better mobile experience */
+    font-size: 1rem; /* Base font size */
 }
 
 h1 {
     color: rgb(0, 0, 0);
     font-size: 2.5rem; /* Increase font size */
-    margin-bottom: 20px; /* Add some space below the heading */
+    margin-bottom: 1.25rem; /* Add some space below the heading */
 }
 
 .button-container,
@@ -24,18 +25,18 @@ h1 {
 #currentTemp,
 #targetTemp,
 #buttonContainer {
-    margin: 10px;
+    margin: 0.625rem;
 }
 
 button {
-    padding: 15px 30px; /* Increase padding for buttons */
-    margin: 10px;
+    padding: 0.9375rem 1.875rem; /* Increase padding for buttons */
+    margin: 0.625rem;
     border: none;
     background-color: #d9d9d9;
     color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 1.5rem; /* Increase font size */
-    border-radius: 5px; /* Add rounded corners */
+    border-radius: 0.3125rem; /* Add rounded corners */
 }
 
 button:hover {
@@ -43,11 +44,11 @@ button:hover {
 }
 
 .status-dot {
-    width: 20px; /* Increase size for better visibility */
-    height: 20px; /* Increase size for better visibility */
+    width: 1.25rem; /* Increase size for better visibility */
+    height: 1.25rem; /* Increase size for better visibility */
     border-radius: 50%;
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 0.625rem;
     vertical-align: middle; /* Align vertically with text */
 }
 
@@ -78,7 +79,7 @@ button:hover {
 /* Responsive design for tablets and smaller screens */
 @media (max-width: 1000px) {
     body {
-        padding: 20px; /* Increase padding for better spacing on small screens */
+        padding: 1.25rem; /* Increase padding for better spacing on small screens */
         justify-content: flex-start; /* Align content to the top */
     }
 
@@ -97,35 +98,35 @@ button:hover {
 
     button {
         width: 100%;
-        padding: 20px 0; /* Adjust padding for better usability on mobile */
+        padding: 1.25rem 0; /* Adjust padding for better usability on mobile */
         font-size: 2rem; /* Increase font size for buttons */
     }
 
     .status-dot {
-        width: 20px; /* Increase size for better visibility */
-        height: 20px; /* Increase size for better visibility */
+        width: 1.25rem; /* Increase size for better visibility */
+        height: 1.25rem; /* Increase size for better visibility */
     }
 
     .status-text,
     #currentTemp,
     #targetTemp {
-        font-size: 2.5rem; /* Increase font size for better readability */
+        font-size: 2rem; /* Increase font size for better readability */
     }
 
     input[type="number"] {
         width: 80%;
-        padding: 20px; /* Increase padding */
+        padding: 1.25rem;
         font-size: 2rem; /* Increase font size */
-        margin-bottom: 15px;
+        margin-bottom: 1.25rem;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 0.25rem;
     }
 }
 
 /* Desktop styles */
 @media (min-width: 1001px) {
     body {
-        margin-top: 50px; /* Increase top margin for desktop */
+        margin-top: 3.125rem; /* Increase top margin for desktop */
     }
 
     h1 {
@@ -133,7 +134,7 @@ button:hover {
     }
 
     button {
-        padding: 20px 40px; /* Increase padding for buttons */
+        padding: 1.25rem 2.5rem; /* Increase padding for buttons */
         font-size: 1.8rem; /* Increase font size for buttons */
     }
 
@@ -142,11 +143,11 @@ button:hover {
     }
 
     .status-dot {
-        width: 20px; /* Increase size */
-        height: 20px; /* Increase size */
+        width: 1.25rem; /* Increase size */
+        height: 1.25rem; /* Increase size */
         border-radius: 50%;
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 0.625rem;
         vertical-align: middle; /* Align vertically with text */
     }
 
@@ -157,10 +158,10 @@ button:hover {
 
     input[type="number"] {
         width: 60%;
-        padding: 15px; /* Increase padding */
+        padding: 0.9375rem;
         font-size: 1.5rem; /* Increase font size */
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 0.25rem;
     }
 }
