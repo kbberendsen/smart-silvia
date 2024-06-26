@@ -43,8 +43,8 @@ button:hover {
 }
 
 .status-dot {
-    width: 15px;
-    height: 15px;
+    width: 20px; /* Increase size for better visibility */
+    height: 20px; /* Increase size for better visibility */
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;
@@ -98,24 +98,24 @@ button:hover {
     button {
         width: 100%;
         padding: 20px 0; /* Adjust padding for better usability on mobile */
-        font-size: 1.8rem; /* Increase font size for buttons */
+        font-size: 2rem; /* Increase font size for buttons */
     }
 
     .status-dot {
-        width: 15px;
-        height: 15px; /* Increase size for better visibility */
+        width: 20px; /* Increase size for better visibility */
+        height: 20px; /* Increase size for better visibility */
     }
 
     .status-text,
     #currentTemp,
     #targetTemp {
-        font-size: 2rem; /* Increase font size for better readability */
+        font-size: 2.5rem; /* Increase font size for better readability */
     }
 
     input[type="number"] {
         width: 80%;
-        padding: 15px;
-        font-size: 1.8rem; /* Increase font size */
+        padding: 20px; /* Increase padding */
+        font-size: 2rem; /* Increase font size */
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -134,16 +134,16 @@ button:hover {
 
     button {
         padding: 20px 40px; /* Increase padding for buttons */
-        font-size: 1.5rem; /* Increase font size for buttons */
+        font-size: 1.8rem; /* Increase font size for buttons */
     }
 
     .status-text {
-        font-size: 1.5rem; /* Increase font size for status text */
+        font-size: 1.8rem; /* Increase font size for status text */
     }
 
     .status-dot {
-        width: 15px;
-        height: 15px;
+        width: 20px; /* Increase size */
+        height: 20px; /* Increase size */
         border-radius: 50%;
         display: inline-block;
         margin-right: 10px;
@@ -152,13 +152,13 @@ button:hover {
 
     #currentTemp,
     #targetTemp {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Increase font size */
     }
 
     input[type="number"] {
         width: 60%;
-        padding: 10px;
-        font-size: 1.2rem; /* Increase font size */
+        padding: 15px; /* Increase padding */
+        font-size: 1.5rem; /* Increase font size */
         margin-bottom: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;

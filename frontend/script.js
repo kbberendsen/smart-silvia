@@ -85,6 +85,10 @@ async function setMode() {
 
 // Function to periodically fetch the current temperature
 async function fetchTemperature() {
+    if (!navigator.onLine) {
+        updateStatus('Offline', 'red-dot', 'red-text');
+        return;
+    }
     try {
         const response = await fetch('/temperature');
         if (!response.ok) throw new Error('Failed to fetch temperature');
@@ -165,6 +169,8 @@ function checkNetworkStatus() {
     console.log(`Network status: ${navigator.onLine ? 'online' : 'offline'}`);
     if (!navigator.onLine) {
         updateStatus('Offline', 'red-dot', 'red-text');
+    } else {
+        updateStatus('Online', 'green-dot', 'green-text');
     }
 }
 
