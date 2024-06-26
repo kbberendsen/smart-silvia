@@ -29,6 +29,11 @@ h1 {
     vertical-align: middle;
 }
 
+#currentTemp,
+#targetTemp {
+    font-size: 2rem; /* Increase font size */
+}
+
 button {
     padding: 1rem; /* Increase padding for buttons */
     margin: 0.625rem;
@@ -66,7 +71,7 @@ button:hover {
 }
 
 .status-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
     vertical-align: middle;
 }
 
@@ -144,11 +149,6 @@ button:hover {
     button {
         padding: 0.5rem; /* Increase padding for buttons */
         font-size: 1rem; /* Increase font size for buttons */
-    }
-
-    #currentTemp,
-    #targetTemp {
-        font-size: 1.8rem; /* Increase font size */
     }
 
     input[type="number"] {
