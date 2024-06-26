@@ -167,7 +167,7 @@ button:hover {
 
     input[type="number"] {
         width: 75%;
-        padding: 2rem;
+        padding: 1rem;
         font-size: 1rem; /* Increase font size */
         margin-bottom: 0.625rem;
         border: 1px solid #ccc;
