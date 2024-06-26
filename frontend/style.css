@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: rgb(0, 0, 0);
     font-size: 2.5rem; /* Increase font size */
     margin-bottom: 20px; /* Add some space below the heading */
 }
@@ -97,11 +97,7 @@ button:hover {
     button {
         width: 80%;
         padding: 30px 50px; /* Increase padding for buttons on mobile */
-        font-size: 4rem; /* Increase font size for buttons */
-    }
-
-    .status-text {
-        font-size: 4rem; /* Increase font size for status text */
+        font-size: 3rem; /* Increase font size for buttons */
     }
 
     canvas {
@@ -110,7 +106,21 @@ button:hover {
     }
 
     .status-text {
-        font-size: 4rem; /* Increase font size for status text */
+        font-size: 2rem; /* Increase font size for status text */
+    }
+
+    .status-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle; /* Align vertically with text */
+    }
+
+    #currentTemp,
+    #targetTemp {
+        font-size: 3rem; /* Increase font size for temperatures */
     }
 }
 
@@ -134,16 +144,11 @@ button:hover {
     }
 
     .status-dot {
-        width: 30px; /* Increase size */
-        height: 30px; /* Increase size */
+        width: 15px;
+        height: 15px;
         border-radius: 50%;
         display: inline-block;
         margin-right: 10px;
         vertical-align: middle; /* Align vertically with text */
-    }
-
-    #currentTemp,
-    #targetTemp {
-        font-size: 4rem; /* Increase font size for temperatures */
     }
 }
