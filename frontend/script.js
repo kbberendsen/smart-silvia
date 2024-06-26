@@ -1,5 +1,6 @@
 let statusTimeout = null;
 let temporaryStatusActive = false;
+let targetTemperature = null;
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
@@ -55,6 +56,7 @@ async function fetchTargetTemperature() {
         if (!temporaryStatusActive) {
             updateStatus('Error fetching target temperature', 'red-dot', 'red-text');
         }
+        throw error; // Re-throw the error to handle it in the caller
     }
 }
 
@@ -104,7 +106,6 @@ async function fetchTemperature() {
 async function initialLoad() {
     try {
         await fetchInitialData();
-        updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after initial data fetch
         setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
     } catch (error) {
         console.error('Error during initial load:', error);
@@ -123,9 +124,11 @@ async function fetchInitialData() {
         document.getElementById('mode').value = data.mode;
         updateTemperatureStatus(parseFloat(data.currentTemperature));
         targetTemperature = parseFloat(data.targetTemperature);
+        updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after successful initial data fetch
     } catch (error) {
         console.error('Error fetching initial data:', error);
         updateStatus('Error fetching initial data', 'red-dot', 'red-text');
+        throw error; // Re-throw the error to handle it in the caller
     }
 }
 
