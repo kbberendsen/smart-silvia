@@ -127,6 +127,7 @@ button:hover {
         margin-bottom: 1.25rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
+        text-align: center;
     }
 }
 
@@ -171,5 +172,6 @@ button:hover {
         margin-bottom: 0.625rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
+        text-align: center;
     }
 }

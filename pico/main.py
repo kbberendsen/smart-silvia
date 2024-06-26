@@ -27,7 +27,7 @@ html = """
     </div>
     <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
     <div id="tempSetContainer" style="display: flex; flex-direction: column; align-items: center;">
-        <input type="number" id="tempInput" min="90" max="98" placeholder="Set target temp" required style="margin-bottom: 10px;">
+        <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required style="margin-bottom: 10px;">
         <button onclick="setTemperature()">Set Temperature</button>
     </div>
     
