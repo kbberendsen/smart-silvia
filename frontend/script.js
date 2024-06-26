@@ -158,5 +158,19 @@ async function setTemperature() {
     }
 }
 
+// Network status check
+function checkNetworkStatus() {
+    if (!navigator.onLine) {
+        updateStatus('Offline', 'red-dot', 'red-text');
+    }
+}
+
+// Add event listeners for network status changes
+window.addEventListener('online', () => updateStatus('Online', 'green-dot', 'green-text'));
+window.addEventListener('offline', () => updateStatus('Offline', 'red-dot', 'red-text'));
+
 // Call initialLoad when the window loads
-window.onload = initialLoad;
+window.onload = () => {
+    initialLoad();
+    setInterval(checkNetworkStatus, 5000); // Periodically check network status every 5 seconds
+};
