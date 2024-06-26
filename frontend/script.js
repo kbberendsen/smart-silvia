@@ -88,7 +88,7 @@ async function fetchTemperature() {
         console.error('Error fetching temperature:', error);
         updateTemperatureStatus(null); // Set status to orange dot when temperature cannot be read
         if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
-            updateStatus('Error fetching temperature', 'red-dot', 'red-text'); // Update status to error
+            updateStatus('Error fetching temperature', 'red-dot', 'red-text');
         }
     }
 }
@@ -98,7 +98,15 @@ async function initialLoad() {
     try {
         await fetchInitialData();
         updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after initial data fetch
-        setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
+        setInterval(async () => {
+            try {
+                await fetchTemperature();
+            } catch (error) {
+                if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
+                    updateStatus('Server disconnected', 'red-dot', 'red-text');
+                }
+            }
+        }, 1000); // Periodically fetch the temperature every second
     } catch (error) {
         console.error('Error during initial load:', error);
         updateStatus('Error during initial load', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
