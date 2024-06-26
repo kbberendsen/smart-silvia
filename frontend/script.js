@@ -21,6 +21,7 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
         temporaryStatusActive = true;
         statusTimeout = setTimeout(() => {
             temporaryStatusActive = false;
+            updateStatus('Online', 'green-dot', 'green-text');
             statusTimeout = null;
         }, duration);
     }
@@ -51,6 +52,9 @@ async function fetchTargetTemperature() {
         document.getElementById('targetTemperature').innerText = targetTemp;
     } catch (error) {
         console.error('Error fetching target temperature:', error);
+        if (!temporaryStatusActive) {
+            updateStatus('Error fetching target temperature', 'red-dot', 'red-text');
+        }
     }
 }
 
@@ -70,6 +74,9 @@ async function setMode() {
         await fetchTargetTemperature(); // Fetch the target temperature when mode changes
     } catch (error) {
         console.error('Error setting mode:', error);
+        if (!temporaryStatusActive) {
+            updateStatus('Error setting mode', 'red-dot', 'red-text');
+        }
     }
 }
 
@@ -98,18 +105,22 @@ async function initialLoad() {
     try {
         await fetchInitialData();
         updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after initial data fetch
-        setInterval(async () => {
-            try {
-                await fetchTemperature();
-            } catch (error) {
-                if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
-                    updateStatus('Server disconnected', 'red-dot', 'red-text');
-                }
-            }
-        }, 1000); // Periodically fetch the temperature every second
+        setInterval(fetchTemperatureWithHandling, 1000); // Periodically fetch the temperature every second
     } catch (error) {
         console.error('Error during initial load:', error);
-        updateStatus('Error during initial load', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
+        updateStatus('Error during initial load', 'red-dot', 'red-text');
+    }
+}
+
+// Wrapper function to handle fetchTemperature errors
+async function fetchTemperatureWithHandling() {
+    try {
+        await fetchTemperature();
+    } catch (error) {
+        console.error('Error in periodic fetch:', error);
+        if (!temporaryStatusActive) {
+            updateStatus('Server disconnected', 'red-dot', 'red-text');
+        }
     }
 }
 
@@ -126,7 +137,7 @@ async function fetchInitialData() {
         targetTemperature = parseFloat(data.targetTemperature);
     } catch (error) {
         console.error('Error fetching initial data:', error);
-        updateStatus('Error fetching initial data', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
+        updateStatus('Error fetching initial data', 'red-dot', 'red-text');
     }
 }
 
