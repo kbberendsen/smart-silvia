@@ -27,6 +27,11 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
     }
 }
 
+// Add event listener for offline status
+window.addEventListener('offline', () => {
+    updateStatus('Error: No Connection', 'red-dot', 'red-text');
+});
+
 // Function to update the temperature status dot
 function updateTemperatureStatus(currentTemp) {
     const tempStatusDot = document.getElementById('tempStatusDot');
