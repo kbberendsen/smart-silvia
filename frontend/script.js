@@ -56,8 +56,9 @@ async function fetchTargetTemperature() {
         if (!temporaryStatusActive) {
             updateStatus('Error fetching target temperature', 'red-dot', 'red-text');
         }
-        throw error; // Re-throw the error to handle it in the caller
+        return false;
     }
+    return true;
 }
 
 // Function to set the machine mode (coffee or steam)
@@ -104,11 +105,10 @@ async function fetchTemperature() {
 
 // Initial data fetch and periodic updates
 async function initialLoad() {
-    try {
-        await fetchInitialData();
+    const initialDataSuccess = await fetchInitialData();
+    if (initialDataSuccess) {
         setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
-    } catch (error) {
-        console.error('Error during initial load:', error);
+    } else {
         updateStatus('Error during initial load', 'red-dot', 'red-text');
     }
 }
@@ -128,8 +128,9 @@ async function fetchInitialData() {
     } catch (error) {
         console.error('Error fetching initial data:', error);
         updateStatus('Error fetching initial data', 'red-dot', 'red-text');
-        throw error; // Re-throw the error to handle it in the caller
+        return false;
     }
+    return true;
 }
 
 // Function to set temperature
