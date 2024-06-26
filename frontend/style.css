@@ -136,7 +136,7 @@ button:hover {
     }
 
     button {
-        padding: 1.25rem 2.5rem; /* Increase padding for buttons */
+        padding: 1.25rem 0; /* Increase padding for buttons */
         font-size: 1.8rem; /* Increase font size for buttons */
     }
 
@@ -160,9 +160,9 @@ button:hover {
     }
 
     input[type="number"] {
-        width: 60%;
-        padding: 0.9375rem;
-        font-size: 1.5rem; /* Increase font size */
+        width: 75%;
+        padding: 2rem;
+        font-size: 5rem; /* Increase font size */
         margin-bottom: 0.625rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
