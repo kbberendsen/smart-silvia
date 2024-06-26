@@ -102,8 +102,8 @@ button:hover {
     }
 
     .status-dot {
-        width: 30px;
-        height: 30px; /* Increase size for better visibility */
+        width: 15px;
+        height: 15px; /* Increase size for better visibility */
     }
 
     .status-text,

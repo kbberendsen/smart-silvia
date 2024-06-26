@@ -1,5 +1,5 @@
-let targetTemperature = 0;
 let statusTimeout = null;
+let temporaryStatusActive = false;
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
@@ -18,8 +18,9 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
 
     // If a duration is specified, reset the status after the duration
     if (duration > 0) {
+        temporaryStatusActive = true;
         statusTimeout = setTimeout(() => {
-            updateStatus('Online', 'green-dot', 'green-text');
+            temporaryStatusActive = false;
             statusTimeout = null;
         }, duration);
     }
@@ -80,14 +81,14 @@ async function fetchTemperature() {
         const temp = await response.text();
         document.getElementById('temperature').innerText = temp;
         updateTemperatureStatus(parseFloat(temp));
-        if (!statusTimeout) { // Only update status if no manual status timeout is set
+        if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
             updateStatus('Online', 'green-dot', 'green-text'); // Update status to online
         }
     } catch (error) {
         console.error('Error fetching temperature:', error);
         updateTemperatureStatus(null); // Set status to orange dot when temperature cannot be read
-        if (!statusTimeout) { // Only update status if no manual status timeout is set
-            updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
+        if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
+            updateStatus('Error fetching temperature', 'red-dot', 'red-text'); // Update status to error
         }
     }
 }
@@ -100,7 +101,7 @@ async function initialLoad() {
         setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
     } catch (error) {
         console.error('Error during initial load:', error);
-        updateStatus('Error', 'red-dot', 'red-text'); // Update status to error if initial load fails
+        updateStatus('Error during initial load', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
     }
 }
 
@@ -117,7 +118,7 @@ async function fetchInitialData() {
         targetTemperature = parseFloat(data.targetTemperature);
     } catch (error) {
         console.error('Error fetching initial data:', error);
-        updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
+        updateStatus('Error fetching initial data', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
     }
 }
 
@@ -142,10 +143,10 @@ async function setTemperature() {
             await fetchTargetTemperature(); // Update the target temperature display
         } catch (error) {
             console.error('Error setting temperature:', error);
-            updateStatus('Error', 'red-dot', 'red-text');
+            updateStatus('Error setting temperature', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
         }
     } else {
-        updateStatus('Invalid temperature', 'red-dot', 'red-text');
+        updateStatus('Invalid temperature', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
     }
 }
 
