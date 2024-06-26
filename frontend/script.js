@@ -43,7 +43,7 @@ async function fetchTargetTemperature() {
         targetTemperature = parseFloat(targetTemp);
         document.getElementById('targetTemperature').innerText = targetTemp;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching target temperature:', error);
     }
 }
 
@@ -62,7 +62,7 @@ async function setMode() {
         await response.text();
         await fetchTargetTemperature(); // Fetch the target temperature when mode changes
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error setting mode:', error);
     }
 }
 
@@ -76,7 +76,7 @@ async function fetchTemperature() {
         updateTemperatureStatus(parseFloat(temp));
         updateStatus('Online', 'green-dot', 'green-text'); // Update status to online
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching temperature:', error);
         updateTemperatureStatus(null); // Set status to orange dot when temperature cannot be read
         updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
     }
@@ -106,7 +106,7 @@ async function fetchInitialData() {
         updateTemperatureStatus(parseFloat(data.currentTemperature));
         targetTemperature = parseFloat(data.targetTemperature);
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching initial data:', error);
         updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
     }
 }
@@ -123,12 +123,16 @@ async function setTemperature() {
                 },
                 body: `temperature=${newTemp}`
             });
-            if (!response.ok) throw new Error('Failed to set temperature');
-            await response.text();
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Failed to set temperature: ${errorMessage}`);
+            }
+            const responseBody = await response.text();
+            console.log('Set temperature response:', responseBody);
             updateStatus('New temperature set', 'green-dot', 'green-text', 3000);
-            fetchTargetTemperature(); // Update the target temperature display
+            await fetchTargetTemperature(); // Update the target temperature display
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error setting temperature:', error);
             updateStatus('Error', 'red-dot', 'red-text');
         }
     } else {
