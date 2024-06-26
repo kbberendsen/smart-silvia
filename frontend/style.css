@@ -66,6 +66,7 @@ button:hover {
 
 .status-text {
     font-size: 1.5rem; /* Increase font size */
+    vertical-align: middle;
 }
 
 .green-text {
@@ -79,12 +80,12 @@ button:hover {
 /* Responsive design for tablets and smaller screens */
 @media (max-width: 1000px) {
     body {
-        padding: 1.25rem; /* Increase padding for better spacing on small screens */
+        padding: 2rem; /* Increase padding for better spacing on small screens */
         justify-content: flex-start; /* Align content to the top */
     }
 
     h1 {
-        font-size: 3rem; /* Increase font size for headings */
+        font-size: 4rem; /* Increase font size for headings */
     }
 
     .button-container,
@@ -99,18 +100,19 @@ button:hover {
     button {
         width: 100%;
         padding: 1.25rem 0; /* Adjust padding for better usability on mobile */
-        font-size: 2rem; /* Increase font size for buttons */
+        font-size: 3rem; /* Increase font size for buttons */
     }
 
     .status-dot {
         width: 1.25rem; /* Increase size for better visibility */
         height: 1.25rem; /* Increase size for better visibility */
+        vertical-align: middle;
     }
 
     .status-text,
     #currentTemp,
     #targetTemp {
-        font-size: 2rem; /* Increase font size for better readability */
+        font-size: 3rem; /* Increase font size for better readability */
     }
 
     input[type="number"] {
@@ -140,6 +142,7 @@ button:hover {
 
     .status-text {
         font-size: 1.8rem; /* Increase font size for status text */
+        vertical-align: middle;
     }
 
     .status-dot {

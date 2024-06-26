@@ -2,6 +2,8 @@ import network
 import asyncio
 from machine_control import handle_request, pid_loop
 
+# <canvas id="tempChart" width="400" height="200"></canvas>
+
 # HTML content with external CSS and JS from GitHub
 html = """
 <!DOCTYPE html>
@@ -28,7 +30,7 @@ html = """
         <input type="number" id="tempInput" min="90" max="98" placeholder="Set target temperature (90-98°C)" required style="margin-bottom: 10px;">
         <button onclick="setTemperature()">Set Temperature</button>
     </div>
-    <canvas id="tempChart" width="400" height="200"></canvas>
+    
 </body>
 </html>
 """
