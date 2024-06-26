@@ -1,4 +1,5 @@
 let targetTemperature = 0;
+let statusTimeout = null;
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
@@ -9,12 +10,17 @@ function updateStatus(text, dotClass, textClass, duration = 0) {
     statusDot.className = `status-dot ${dotClass}`;
     document.getElementById('statusMessage').classList.remove('hidden');
 
+    // Clear any existing timeout
+    if (statusTimeout) {
+        clearTimeout(statusTimeout);
+        statusTimeout = null;
+    }
+
     // If a duration is specified, reset the status after the duration
     if (duration > 0) {
-        setTimeout(() => {
-            statusText.innerText = 'Online';
-            statusText.className = 'status-text green-text';
-            statusDot.className = 'status-dot green-dot';
+        statusTimeout = setTimeout(() => {
+            updateStatus('Online', 'green-dot', 'green-text');
+            statusTimeout = null;
         }, duration);
     }
 }
@@ -74,11 +80,15 @@ async function fetchTemperature() {
         const temp = await response.text();
         document.getElementById('temperature').innerText = temp;
         updateTemperatureStatus(parseFloat(temp));
-        updateStatus('Online', 'green-dot', 'green-text'); // Update status to online
+        if (!statusTimeout) { // Only update status if no manual status timeout is set
+            updateStatus('Online', 'green-dot', 'green-text'); // Update status to online
+        }
     } catch (error) {
         console.error('Error fetching temperature:', error);
         updateTemperatureStatus(null); // Set status to orange dot when temperature cannot be read
-        updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
+        if (!statusTimeout) { // Only update status if no manual status timeout is set
+            updateStatus('Error', 'red-dot', 'red-text'); // Update status to error
+        }
     }
 }
 
