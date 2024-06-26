@@ -109,7 +109,10 @@ button:hover {
         vertical-align: middle;
     }
 
-    .status-text,
+    .status-text{
+        font-size: 2rem;
+    }
+    
     #currentTemp,
     #targetTemp {
         font-size: 3rem; /* Increase font size for better readability */
