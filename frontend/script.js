@@ -1,13 +1,14 @@
 let statusTimeout = null;
 let temporaryStatusActive = false;
+let targetTemperature = null;
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
     const statusText = document.getElementById('statusText');
     const statusDot = document.getElementById('statusDot');
     statusText.innerText = text;
-    statusText.className = status-text ${textClass}; // Apply the color to the text
-    statusDot.className = status-dot ${dotClass};
+    statusText.className = `status-text ${textClass}`; // Apply the color to the text
+    statusDot.className = `status-dot ${dotClass}`;
     document.getElementById('statusMessage').classList.remove('hidden');
 
     // Clear any existing timeout
@@ -67,7 +68,7 @@ async function setMode() {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: mode=${mode}
+            body: `mode=${mode}`
         });
         if (!response.ok) throw new Error('Failed to set mode');
         await response.text();
@@ -139,11 +140,11 @@ async function setTemperature() {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: temperature=${newTemp}
+                body: `temperature=${newTemp}`
             });
             const responseBody = await response.text();
             if (!response.ok) {
-                throw new Error(Failed to set temperature: ${responseBody});
+                throw new Error(`Failed to set temperature: ${responseBody}`);
             }
             console.log('Set temperature response:', responseBody);
             updateStatus('New temperature set', 'green-dot', 'green-text', 3000); // Display message for 3 seconds
