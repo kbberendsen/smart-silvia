@@ -102,5 +102,30 @@ async function fetchInitialData() {
     }
 }
 
+// Function to set temperature
+async function setTemperature() {
+    const newTemp = document.getElementById('tempInput').value;
+    if (newTemp && newTemp >= 90 && newTemp <= 98) {
+        try {
+            const response = await fetch('/setTemperature', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `temperature=${newTemp}`
+            });
+            if (!response.ok) throw new Error('Failed to set temperature');
+            await response.text();
+            updateStatus('New temperature set', 'green-dot', 'green-text', 3000);
+            fetchTargetTemperature(); // Update the target temperature display
+        } catch (error) {
+            console.error('Error:', error);
+            updateStatus('Error', 'red-dot', 'red-text');
+        }
+    } else {
+        updateStatus('Invalid temperature', 'red-dot', 'red-text');
+    }
+}
+
 // Call initialLoad when the window loads
 window.onload = initialLoad;

@@ -82,7 +82,7 @@ button:hover {
     }
 
     h1 {
-        font-size: 4rem; /* Increase font size for headings */
+        font-size: 3rem; /* Increase font size for headings */
     }
 
     .button-container,
@@ -97,7 +97,7 @@ button:hover {
     button {
         width: 80%;
         padding: 30px 50px; /* Increase padding for buttons on mobile */
-        font-size: 3rem; /* Increase font size for buttons */
+        font-size: 1.5rem; /* Increase font size for buttons */
     }
 
     canvas {
@@ -120,7 +120,7 @@ button:hover {
 
     #currentTemp,
     #targetTemp {
-        font-size: 3rem; /* Increase font size for temperatures */
+        font-size: 2rem; /* Increase font size for temperatures */
     }
 }
 
@@ -150,5 +150,10 @@ button:hover {
         display: inline-block;
         margin-right: 10px;
         vertical-align: middle; /* Align vertically with text */
+    }
+
+    #currentTemp,
+    #targetTemp {
+        font-size: 1.5rem;
     }
 }

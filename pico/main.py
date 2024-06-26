@@ -15,17 +15,6 @@ html = """
 </head>
 <body>
     <h1>Smart Silvia</h1>
-    <div class="button-container">
-        <button onclick="controlMachine('on')">Turn On</button>
-        <button onclick="controlMachine('off')">Turn Off</button>
-    </div>
-    <div id="modeContainer">
-        <label for="mode">Mode: </label>
-        <select id="mode" name="mode" onchange="setMode()">
-            <option value="coffee">Coffee</option>
-            <option value="steam">Steam</option>
-        </select>
-    </div>
     <div id="statusMessage">
         <span id="statusDot" class="status-dot"></span>
         <span id="statusText" class="status-text">Status: Loading...</span>
@@ -35,8 +24,12 @@ html = """
         <span id="tempStatusDot" class="status-dot orange-dot"></span>
     </div>
     <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
+    <div id="tempSetContainer">
+        <input type="number" id="tempInput" min="90" max="98" placeholder="Set temperature (90-98°C)" required>
+        <button onclick="setTemperature()">Set Temperature</button>
+    </div>
     <div id="buttonContainer">
-        <button onclick="openSetTemperaturePage()">Set Temperature</button>
+        <button onclick="openSetTemperaturePage()">Other Settings</button>
     </div>
     <canvas id="tempChart" width="400" height="200"></canvas>
     

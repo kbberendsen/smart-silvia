@@ -19,15 +19,18 @@ def handle_request(request):
     except ValueError:
         return 'HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain; charset=utf-8\r\n\r\nInvalid request format'.encode('utf-8')
 
+    # GET current temperature
     if path == '/temperature':
         if method == 'GET':
             return f'HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n{current_temperature}'.encode('utf-8')
 
+    # GET target temperature
     elif path == '/targetTemperature':
         if method == 'GET':
             target_temp = coffee_pid.setpoint if mode == 'coffee' else steam_pid.setpoint
             return f'HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n{target_temp}'.encode('utf-8')
 
+    # POST coffee or steam mode
     elif path == '/mode':
         if method == 'POST':
             content_length = int(request.split('Content-Length: ')[1].split('\r\n')[0])
@@ -39,6 +42,7 @@ def handle_request(request):
             else:
                 return 'HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain; charset=utf-8\r\n\r\nInvalid mode'.encode('utf-8')
 
+    # GET intitial data (current temp, target temp, mode)
     elif path == '/initialData':
         if method == 'GET':
             target_temp = coffee_pid.setpoint if mode == 'coffee' else steam_pid.setpoint
