@@ -142,12 +142,12 @@ button:hover {
     }
 
     button {
-        padding: 1.25rem 0; /* Increase padding for buttons */
-        font-size: 1.8rem; /* Increase font size for buttons */
+        padding: 0.5rem; /* Increase padding for buttons */
+        font-size: 1rem; /* Increase font size for buttons */
     }
 
     .status-text {
-        font-size: 1.8rem; /* Increase font size for status text */
+        font-size: 1rem; /* Increase font size for status text */
         vertical-align: middle;
     }
 
@@ -167,7 +167,7 @@ button:hover {
 
     input[type="number"] {
         width: 75%;
-        padding: 0.1rem;
+        padding: 0.5rem;
         font-size: 1rem; /* Increase font size */
         margin-bottom: 0.625rem;
         border: 1px solid #ccc;
