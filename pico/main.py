@@ -2,6 +2,7 @@ import network
 import asyncio
 from time import sleep
 from machine_control import handle_request, pid_loop
+from secrets import WIFI_SSD, WIFI_PASSWORD
 
 # <canvas id="tempChart" width="400" height="200"></canvas>
 
@@ -40,7 +41,7 @@ wlan = network.WLAN(network.STA_IF)
 # Connect to Wi-Fi
 if not wlan.isconnected():
     wlan.active(True)
-    wlan.connect('SSID', 'PASSWORD')
+    wlan.connect(WIFI_SSD, WIFI_PASSWORD)
 
 while not wlan.isconnected():
     print('Connecting...')
@@ -48,6 +49,14 @@ while not wlan.isconnected():
     pass
 
 print('network config:', wlan.ifconfig())
+
+# Check for ota update
+def _otaUpdate():
+    ulogging.info('Checking for Updates...')
+    from .ota_updater import OTAUpdater
+    otaUpdater = OTAUpdater('https://github.com/kbberendsen/smart-silvia', github_src_dir='src', main_dir='pico', secrets_file="secrets.py")
+    otaUpdater.install_update_if_available()
+    del(otaUpdater)
 
 # Serve Web Application
 async def serve_client(reader, writer):
