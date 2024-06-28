@@ -4,7 +4,7 @@ import uos
 import urequests
 
 
-def check_version(host, project, auth=None, timeout=5) -> (bool, str):
+def check_version(host, project, auth=None, timeout=5):
     current_version = ''
     try:
         if 'version' in uos.listdir():
