@@ -7,10 +7,6 @@ from ds18x20 import DS18X20
 from machine import Pin, I2C
 import ssd1306
 
-# using default address 0x3C
-i2c = I2C(0, sda=Pin(16), scl=Pin(17))
-display = ssd1306.SSD1306_I2C(128, 64, i2c)
-
 # P: if you’re not where you want to be, get there.
 # I: if you haven’t been where you want to be for a long time, get there faster
 # D: if you’re getting close to where you want to be, slow down.
@@ -19,21 +15,19 @@ display = ssd1306.SSD1306_I2C(128, 64, i2c)
 coffee_pid = PID(Kp=45, Ki=0.1, Kd=0.05, setpoint=94.00)
 steam_pid = PID(Kp=45, Ki=0.1, Kd=0.05, setpoint=140.00)
 
+# Set variables
 mode = 'coffee'
+target_temp = coffee_pid.setpoint if mode == 'coffee' else steam_pid.setpoint
 
 # Temp device is on GPIO12
 dat = machine.Pin(2)
 power_pin = machine.Pin(3, machine.Pin.OUT)
 power_pin.on()
-
-# Create the onewire object (temp)
-ds = DS18X20(onewire.OneWire(dat))
+ds = DS18X20(onewire.OneWire(dat)) # Create the onewire object (temp)
 
 # Display
 i2c = I2C(0, sda=Pin(16), scl=Pin(17))
 display = ssd1306.SSD1306_I2C(128, 64, i2c)
-
-target_temp = coffee_pid.setpoint if mode == 'coffee' else steam_pid.setpoint
 
 def handle_request(request):
     global coffee_pid, steam_pid, current_temperature, target_temp, mode
@@ -102,12 +96,19 @@ def handle_request(request):
 
 async def update_pid():
     global current_temperature, target_temp, mode
-    # scan for devices on the bus
+
+    # Scan for devices on the bus
     roms = ds.scan()
+
     while True:
+        # Temp
         ds.convert_temp()
         current_temperature = round(ds.read_temp(roms[0]), 2)
+
+        # PID
         pid_output = (coffee_pid if mode == 'coffee' else steam_pid).compute(current_temperature)
+
+        # Display
         display.fill(0)
         display.text(f'Temp:   {current_temperature}', 15, 24, 1)
         display.text(f'Target: {round(target_temp, 2)}', 15, 33, 1)
