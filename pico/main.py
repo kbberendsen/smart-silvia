@@ -1,5 +1,6 @@
 import network
 import asyncio
+from time import sleep
 from machine_control import handle_request, pid_loop
 
 # <canvas id="tempChart" width="400" height="200"></canvas>
@@ -35,15 +36,18 @@ html = """
 </html>
 """
 
+wlan = network.WLAN(network.STA_IF)
 # Connect to Wi-Fi
-# wlan = network.WLAN(network.STA_IF)
-# wlan.active(True)
-# wlan.connect('your-SSID', 'your-PASSWORD')
+if not wlan.isconnected():
+    wlan.active(True)
+    wlan.connect('SSID', 'PASSWORD')
 
-# while not wlan.isconnected():
-#     pass
+while not wlan.isconnected():
+    print('Connecting...')
+    sleep(1)
+    pass
 
-# print('network config:', wlan.ifconfig())
+print('network config:', wlan.ifconfig())
 
 # Serve Web Application
 async def serve_client(reader, writer):
@@ -60,13 +64,15 @@ async def serve_client(reader, writer):
         else:
             response = 'HTTP/1.1 404 Not Found\r\nContent-Type: text/plain; charset=utf-8\r\n\r\nNot Found'.encode('utf-8')
     
-    await writer.write(response)
+    writer.write(response)
     await writer.drain()  # Ensure all data is sent
-    await writer.close()
+    await writer.wait_closed()
+
 
 async def main():
     server = await asyncio.start_server(serve_client, '0.0.0.0', 80)
     asyncio.create_task(pid_loop())  # Start the PID control loop
-    await server.serve_forever()
+    while True:
+        await asyncio.sleep(0.1)
 
 asyncio.run(main())
