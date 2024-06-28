@@ -48,15 +48,27 @@ while not wlan.isconnected():
     sleep(1)
     pass
 
-print('network config:', wlan.ifconfig())
+print('Network config:', wlan.ifconfig())
 
-# Check for ota update
-def _otaUpdate():
-    ulogging.info('Checking for Updates...')
-    from .ota_updater import OTAUpdater
-    otaUpdater = OTAUpdater('https://github.com/kbberendsen/smart-silvia', github_src_dir='src', main_dir='pico', secrets_file="secrets.py")
-    otaUpdater.install_update_if_available()
-    del(otaUpdater)
+wlan_ip = wlan.ifconfig()[0]
+print(wlan_ip)
+
+# Check for OTA update
+def ota_update():
+    print('Checking for Updates...')
+    from lib.ota_updater import OTAUpdater
+    ota_updater = OTAUpdater('https://github.com/kbberendsen/smart-silvia', github_src_dir='lib', main_dir='pico', secrets_file="secrets.py")
+    has_updated = ota_updater.install_update_if_available()
+    if has_updated:
+        machine.reset()
+    else:
+        del ota_updater
+        gc.collect()
+
+try:
+    ota_update()
+except:
+    print('Updating failed')
 
 # Serve Web Application
 async def serve_client(reader, writer):
