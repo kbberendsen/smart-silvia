@@ -150,7 +150,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 30vh; /* Adjust height for tablets */
+        height: 300px; /* Adjust height for tablets */
         width: 80vw;
     }
 }
