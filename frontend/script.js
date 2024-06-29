@@ -1,6 +1,8 @@
 let statusTimeout = null;
 let temporaryStatusActive = false;
 let targetTemperature = null;
+let tempChart = null; // Chart.js instance
+let temperatureData = []; // Array to store temperature data points
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
@@ -91,6 +93,7 @@ async function fetchTemperature() {
         const temp = await response.text();
         document.getElementById('temperature').innerText = temp;
         updateTemperatureStatus(parseFloat(temp));
+        addTemperatureData(parseFloat(temp)); // Update the chart with the new temperature
         if (!temporaryStatusActive) { // Only update status if no manual status timeout is set
             updateStatus('Online', 'green-dot', 'green-text'); // Update status to online
         }
@@ -107,6 +110,7 @@ async function fetchTemperature() {
 async function initialLoad() {
     try {
         await fetchInitialData();
+        initializeChart(); // Initialize the temperature chart
         updateStatus('Online', 'green-dot', 'green-text'); // Update status to online after initial data fetch
         setInterval(fetchTemperature, 1000); // Periodically fetch the temperature every second
     } catch (error) {
@@ -157,6 +161,55 @@ async function setTemperature() {
         }
     } else {
         updateStatus('Invalid temperature', 'red-dot', 'red-text', 3000); // Display error message for 3 seconds
+    }
+}
+
+// Function to initialize the Chart.js temperature chart
+function initializeChart() {
+    const ctx = document.getElementById('tempChart').getContext('2d');
+    tempChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Labels will be dynamically added
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: temperatureData,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'second'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Time'
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Temperature (°C)'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Function to add temperature data to the chart
+function addTemperatureData(temp) {
+    const now = new Date();
+    if (tempChart) {
+        tempChart.data.labels.push(now);
+        tempChart.data.datasets[0].data.push(temp);
+        tempChart.update();
     }
 }
 
