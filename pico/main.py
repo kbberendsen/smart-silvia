@@ -1,9 +1,10 @@
 import network
-import asyncio
+import urequests as requests
+import uasyncio as asyncio
 from time import sleep
 from machine_control import handle_request, pid_loop
 from machine import Pin, I2C
-from secrets import WIFI_SSD, WIFI_PASSWORD
+from secrets import WIFI_SSID, WIFI_PASSWORD
 import lib.ssd1306 as ssd1306
 
 # <canvas id="tempChart" width="400" height="200"></canvas>
@@ -15,6 +16,7 @@ html = """
 <head>
     <meta charset="UTF-8">
     <title>Smart Silvia</title>
+    <link rel="icon" href="https://kbberendsen.github.io/smart-silvia/frontend/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://kbberendsen.github.io/smart-silvia/frontend/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kbberendsen.github.io/smart-silvia/frontend/script.js"></script>
@@ -39,25 +41,43 @@ html = """
 </html>
 """
 
-wlan = network.WLAN(network.STA_IF)
-# Connect to Wi-Fi
-if not wlan.isconnected():
-    wlan.active(True)
-    wlan.connect(WIFI_SSD, WIFI_PASSWORD)
-
-while not wlan.isconnected():
-    print('Connecting...')
-    sleep(1)
-    pass
-
-print('Network config:', wlan.ifconfig())
-
-wlan_ip = wlan.ifconfig()[0]
-print(wlan_ip)
-
 # Display
 i2c = I2C(0, sda=Pin(16), scl=Pin(17))
 display = ssd1306.SSD1306_I2C(128, 64, i2c)
+
+# Connect to Wi-Fi
+display.fill(0)
+display.text('Connecting...', 15, 24, 1)
+display.show()
+
+sleep(1)
+
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect(WIFI_SSID, WIFI_PASSWORD)
+
+max_attempts = 15
+attempts = 0
+while not wlan.isconnected() and attempts < max_attempts:
+    print(f'Attempt {attempts + 1} to connect to Wi-Fi...')
+    display.fill(0)
+    display.text('Connecting...', 15, 24, 1)
+    display.text(f'Attempt {attempts + 1}', 15, 33, 1)
+    display.show()
+    sleep(1)
+    attempts += 1
+
+if wlan.isconnected():
+    print('Successfully connected to Wi-Fi!')
+    print('Network config:', wlan.ifconfig())
+    wlan_ip = wlan.ifconfig()[0]
+else:
+    wlan_ip = None
+    print('Failed to connect to Wi-Fi.')
+    display.fill(0)
+    display.text('Connection', 15, 24, 1)
+    display.text('failed', 15, 33, 1)
+    display.show()
 
 # Serve Web Application
 async def serve_client(reader, writer):
@@ -81,7 +101,7 @@ async def serve_client(reader, writer):
 async def main():
     server = await asyncio.start_server(serve_client, '0.0.0.0', 80)
 
-    # Display IP on startup
+    # # Display IP on startup
     display.fill(0)
     display.text('IP Address', 15, 24, 1)
     display.text(f'{wlan_ip}', 15, 33, 1)

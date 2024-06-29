@@ -1,5 +1,5 @@
 import json
-import asyncio
+import uasyncio as asyncio
 from lib.pid import PID
 import onewire
 import machine
