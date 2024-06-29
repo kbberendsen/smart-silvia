@@ -151,6 +151,7 @@ button:hover {
 
     #tempChart {
         height: 30vh; /* Adjust height for mobile */
+        width: 80vw;
     }
 }
 
@@ -208,6 +209,7 @@ button:hover {
 
     #tempChart {
         height: 35vh; /* Adjust height for tablets */
+        width: 80vw;
     }
 }
 
@@ -238,5 +240,6 @@ button:hover {
 
     #tempChart {
         height: 60vh; /* Increase height for desktop */
+        width: 80vw;
     }
 }
