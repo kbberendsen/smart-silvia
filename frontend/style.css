@@ -89,7 +89,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    padding-top: 20px; /* Add padding above the chart */
+    padding-top: 10px; /* Add padding above the chart */
 }
 
 #tempChart {
@@ -150,7 +150,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 30vh; /* Adjust height for mobile */
+        height: 20vh; /* Adjust height for mobile */
         width: 80vw;
     }
 }
@@ -208,7 +208,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 30vh; /* Adjust height for tablets */
+        height: 20vh; /* Adjust height for tablets */
         width: 80vw;
     }
 }
@@ -239,7 +239,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 45vh;
+        height: 40vh;
         width: 80vw;
     }
 }
