@@ -63,28 +63,6 @@ async function fetchTargetTemperature() {
     }
 }
 
-// Function to set the machine mode (coffee or steam)
-async function setMode() {
-    const mode = document.getElementById('mode').value;
-    try {
-        const response = await fetch('/mode', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `mode=${mode}`
-        });
-        if (!response.ok) throw new Error('Failed to set mode');
-        await response.text();
-        await fetchTargetTemperature(); // Fetch the target temperature when mode changes
-    } catch (error) {
-        console.error('Error setting mode:', error);
-        if (!temporaryStatusActive) {
-            updateStatus('Error setting mode', 'red-dot', 'red-text');
-        }
-    }
-}
-
 // Function to periodically fetch the current temperature
 async function fetchTemperature() {
     try {
@@ -190,8 +168,8 @@ function initializeChart() {
 // Function to add temperature data to the chart
 function addTemperatureData(temp) {
     const now = new Date();
-    temperatureData.push(temp);
     timeData.push(now);
+    temperatureData.push(temp);
     Plotly.extendTraces('tempChart', {
         x: [timeData],
         y: [temperatureData]
