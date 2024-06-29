@@ -239,7 +239,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 60vh; /* Increase height for desktop */
+        height: 50vh;
         width: 80vw;
     }
 }
