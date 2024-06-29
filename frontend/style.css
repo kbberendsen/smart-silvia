@@ -89,6 +89,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
+    padding-top: 20px; /* Add padding above the chart */
 }
 
 #tempChart {
@@ -97,14 +98,14 @@ button:hover {
 }
 
 /* Responsive design for tablets and smaller screens */
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
     body {
-        padding: 5rem;
+        padding: 1rem;
         justify-content: flex-start;
     }
 
     h1 {
-        font-size: 7rem;
+        font-size: 4rem; /* Decrease font size for headings */
     }
 
     .button-container,
@@ -119,33 +120,94 @@ button:hover {
     button {
         width: 100%;
         padding: 1rem;
-        font-size: 2.5rem;
+        font-size: 2rem; /* Decrease font size for buttons */
     }
 
     .status-dot {
-        width: 1.25rem;
+        width: 1.25rem; /* Increase size for better visibility */
         height: 1.25rem;
         vertical-align: middle;
     }
 
     .status-text {
-        font-size: 2.5rem;
+        font-size: 2rem;
         vertical-align: middle;
     }
 
     #currentTemp,
     #targetTemp {
-        font-size: 3rem;
+        font-size: 2.5rem; /* Decrease font size */
     }
 
     input[type="number"] {
         width: 80%;
         padding: 1rem;
-        font-size: 2.5rem;
+        font-size: 2rem; /* Decrease font size */
         margin-bottom: 1.25rem;
         border: 1px solid #ccc;
         border-radius: 0.25rem;
         text-align: center;
+    }
+
+    #tempChart {
+        height: 30vh; /* Adjust height for mobile */
+    }
+}
+
+/* Responsive design for tablets and smaller screens */
+@media (max-width: 1000px) {
+    body {
+        padding: 5rem;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: 5rem; /* Decrease font size for headings */
+    }
+
+    .button-container,
+    #modeContainer,
+    #statusMessage,
+    #currentTemp,
+    #targetTemp,
+    #buttonContainer {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 2rem; /* Decrease font size for buttons */
+    }
+
+    .status-dot {
+        width: 1.25rem; /* Increase size for better visibility */
+        height: 1.25rem;
+        vertical-align: middle;
+    }
+
+    .status-text {
+        font-size: 2rem;
+        vertical-align: middle;
+    }
+
+    #currentTemp,
+    #targetTemp {
+        font-size: 2.5rem; /* Decrease font size */
+    }
+
+    input[type="number"] {
+        width: 80%;
+        padding: 1rem;
+        font-size: 2rem; /* Decrease font size */
+        margin-bottom: 1.25rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        text-align: center;
+    }
+
+    #tempChart {
+        height: 35vh; /* Adjust height for tablets */
     }
 }
 
@@ -172,5 +234,9 @@ button:hover {
         border: 1px solid #ccc;
         border-radius: 0.25rem;
         text-align: center;
+    }
+
+    #tempChart {
+        height: 60vh; /* Increase height for desktop */
     }
 }

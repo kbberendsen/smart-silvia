@@ -34,7 +34,9 @@ html = """
         <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required style="margin-bottom: 10px;">
         <button onclick="setTemperature()">Set Temperature</button>
     </div>
-    <div id="tempChart" style="width:80%; height:600px;"></div>
+    <div id="content">
+        <div id="tempChart" class="chart"></div>
+    </div>
 </body>
 </html>
 """
