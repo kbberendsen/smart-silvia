@@ -169,19 +169,24 @@ function initializeChart() {
 // Function to add temperature data to the chart
 function addTemperatureData(temp) {
     const now = new Date();
-    timeData.push(now);
-    temperatureData.push(temp);
+    const cutoffTime = new Date(now.getTime() - 60000);
 
     // Remove data older than 60 seconds
-    const cutoffTime = new Date(now.getTime() - 60000);
     while (timeData.length > 0 && timeData[0] < cutoffTime) {
         timeData.shift();
         temperatureData.shift();
     }
 
-    Plotly.update('tempChart', {
-        x: [timeData],
-        y: [temperatureData]
+    timeData.push(now);
+    temperatureData.push(temp);
+
+    Plotly.extendTraces('tempChart', {
+        x: [[now]],
+        y: [[temp]]
+    }, [0]);
+
+    Plotly.relayout('tempChart', {
+        'xaxis.range': [cutoffTime, now]
     });
 }
 
