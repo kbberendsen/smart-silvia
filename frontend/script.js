@@ -166,7 +166,7 @@ function initializeChart() {
         plot_bgcolor: 'rgba(0,0,0,0)', // Set the plot background to transparent
         autosize: true
     };
-    Plotly.newPlot('tempChart', data, layout, {responsive: true});
+    Plotly.newPlot('tempChart', data, layout, {responsive: true, displayModeBar: false});
 }
 
 // Function to add temperature data to the chart
