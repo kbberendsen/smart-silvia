@@ -1,8 +1,8 @@
 let statusTimeout = null;
 let temporaryStatusActive = false;
 let targetTemperature = null;
-let tempChart = null; // Chart.js instance
 let temperatureData = []; // Array to store temperature data points
+let timeData = []; // Array to store time points
 
 // Function to update the status message and dot color
 function updateStatus(text, dotClass, textClass, duration = 0) {
@@ -164,53 +164,38 @@ async function setTemperature() {
     }
 }
 
-// Function to initialize the Chart.js temperature chart
+// Function to initialize the Plotly.js temperature chart
 function initializeChart() {
-    const ctx = document.getElementById('tempChart').getContext('2d');
-    tempChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [], // Labels will be dynamically added
-            datasets: [{
-                label: 'Temperature (°C)',
-                data: temperatureData,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                fill: false
-            }]
+    const trace = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        name: 'Temperature (°C)',
+        line: {color: 'rgba(75, 192, 192, 1)'}
+    };
+    const data = [trace];
+    const layout = {
+        title: 'Temperature Over Time',
+        xaxis: {
+            title: 'Time',
+            type: 'date'
         },
-        options: {
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'second'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Time'
-                    }
-                },
-                y: {
-                    beginAtZero: false,
-                    title: {
-                        display: true,
-                        text: 'Temperature (°C)'
-                    }
-                }
-            }
+        yaxis: {
+            title: 'Temperature (°C)'
         }
-    });
+    };
+    Plotly.newPlot('tempChart', data, layout);
 }
 
 // Function to add temperature data to the chart
 function addTemperatureData(temp) {
     const now = new Date();
-    if (tempChart) {
-        tempChart.data.labels.push(now);
-        tempChart.data.datasets[0].data.push(temp);
-        tempChart.update();
-    }
+    temperatureData.push(temp);
+    timeData.push(now);
+    Plotly.extendTraces('tempChart', {
+        x: [timeData],
+        y: [temperatureData]
+    }, [0]);
 }
 
 // Call initialLoad when the window loads
