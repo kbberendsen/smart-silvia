@@ -181,7 +181,7 @@ button:hover {
     }
 
     #tempChart {
-        height: 40vh;
+        height: 300px;
         width: 80vw;
     }
 }
