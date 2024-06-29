@@ -94,7 +94,7 @@ button:hover {
 
 #tempChart {
     width: 100%;
-    flex-grow: 1;
+    flex-grow: 0.8;
 }
 
 /* Responsive design for tablets and smaller screens */
