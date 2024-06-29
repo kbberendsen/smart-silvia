@@ -43,21 +43,21 @@ html = """
 </head>
 <body class="flex flex-col items-center justify-between min-h-screen bg-gray-200 text-center">
     <div class="flex flex-col items-center justify-center w-full h-1/3">
-        <h1 class="text-black font-bold p-6 text-5xl sm:text-4xl md:text-5xl mb-5">Smart Silvia</h1>
-        <div id="statusMessage" class="my-2 text-3xl sm:text-3xl md:text-2xl">
+        <h1 class="text-black font-bold p-6 text-4xl sm:text-5xl md:text-7xl lg:text-5xl xl:text-5xl mb-5">Smart Silvia</h1>
+        <div id="statusMessage" class="my-2 text-2xl sm:text-4xl md:text-5xl lg:text-3xl xl:text-3xl">
             <span id="statusDot" class="status-dot green-dot"></span>
             <span id="statusText">Online</span>
         </div>
-        <div id="currentTemp" class="text-4xl sm:text-3xl md:text-4xl my-2">
+        <div id="currentTemp" class="text-3xl sm:text-4xl md:text-6xl lg:text-4xl xl:text-4xl my-2">
             Current Temperature: <span id="temperature">28.88</span>°C
             <span id="tempStatusDot" class="status-dot orange-dot"></span>
         </div>
-        <div id="targetTemp" class="text-4xl sm:text-3xl md:text-4xl my-2">
+        <div id="targetTemp" class="text-3xl sm:text-4xl md:text-6xl lg:text-4xl xl:text-4xl my-2">
             Target Temperature: <span id="targetTemperature">98</span>°C
         </div>
         <div id="tempSetContainer" class="flex flex-col items-center mt-4 mb-6">
-            <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required class="mb-4 p-3 text-3xl sm:text-2xl border border-gray-300 rounded text-center w-full max-w-xs md:max-w-sm lg:max-w-md">
-            <button onclick="setTemperature()" class="py-3 px-3 bg-gray-300 text-black rounded hover:bg-gray-400 text-3xl sm:text-2xl">Set Temperature</button>
+            <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required class="mb-4 p-3 text-2xl sm:text-3xl md:text-5xl lg:text-3xl xl:text-3xl border border-gray-300 rounded text-center w-full max-w-xs md:max-w-sm lg:max-w-sm">
+            <button onclick="setTemperature()" class="py-3 px-4 bg-gray-300 text-black rounded hover:bg-gray-400 text-2xl sm:text-3xl md:text-5xl lg:text-3xl xl:text-3xl">Set Temperature</button>
         </div>
     </div>
     <div class="w-full h-2/3 flex-grow flex flex-col items-center pt-5">

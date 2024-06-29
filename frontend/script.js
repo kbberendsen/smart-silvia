@@ -160,12 +160,13 @@ function initializeChart() {
         },
         yaxis: {
             title: 'Temperature (°C)',
-            range: [0, 100] // Adjust y-axis to start from 0 and end at a reasonable value
+            range: [0, 140] // Adjust y-axis to start from 0 and end at a reasonable value
         },
         paper_bgcolor: 'rgba(0,0,0,0)', // Set the paper background to transparent
-        plot_bgcolor: 'rgba(0,0,0,0)' // Set the plot background to transparent
+        plot_bgcolor: 'rgba(0,0,0,0)', // Set the plot background to transparent
+        autosize: true
     };
-    Plotly.newPlot('tempChart', data, layout);
+    Plotly.newPlot('tempChart', data, layout, {responsive: true});
 }
 
 // Function to add temperature data to the chart
