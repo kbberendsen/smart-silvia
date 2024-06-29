@@ -7,8 +7,6 @@ from machine import Pin, I2C
 from secrets import WIFI_SSID, WIFI_PASSWORD
 import lib.ssd1306 as ssd1306
 
-# <canvas id="tempChart" width="400" height="200"></canvas>
-
 # HTML content with external CSS and JS from GitHub
 html = """
 <!DOCTYPE html>
@@ -18,7 +16,7 @@ html = """
     <title>Smart Silvia</title>
     <link rel="icon" href="https://kbberendsen.github.io/smart-silvia/frontend/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://kbberendsen.github.io/smart-silvia/frontend/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://kbberendsen.github.io/smart-silvia/frontend/script.js"></script>
 </head>
 <body>
@@ -36,7 +34,7 @@ html = """
         <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required style="margin-bottom: 10px;">
         <button onclick="setTemperature()">Set Temperature</button>
     </div>
-    
+    <div id="tempChart" style="width:80%; height:600px;"></div>
 </body>
 </html>
 """
