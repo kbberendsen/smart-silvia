@@ -15,30 +15,57 @@ html = """
     <meta charset="UTF-8">
     <title>Smart Silvia</title>
     <link rel="icon" href="https://kbberendsen.github.io/smart-silvia/frontend/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://kbberendsen.github.io/smart-silvia/frontend/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://kbberendsen.github.io/smart-silvia/frontend/script.js"></script>
+    <style>
+        .status-dot {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.625rem;
+            vertical-align: middle;
+        }
+
+        .green-dot {
+            background-color: green;
+        }
+
+        .red-dot {
+            background-color: red;
+        }
+
+        .orange-dot {
+            background-color: orange;
+        }
+    </style>
 </head>
-<body>
-    <h1>Smart Silvia</h1>
-    <div id="statusMessage">
-        <span id="statusDot" class="status-dot"></span>
-        <span id="statusText" class="status-text">Status: Loading...</span>
+<body class="flex flex-col items-center justify-between min-h-screen bg-gray-200 text-center">
+    <div class="flex flex-col items-center justify-center w-full h-1/3">
+        <h1 class="text-black font-bold p-6 text-5xl sm:text-4xl md:text-5xl mb-5">Smart Silvia</h1>
+        <div id="statusMessage" class="my-2 text-3xl sm:text-3xl md:text-2xl">
+            <span id="statusDot" class="status-dot green-dot"></span>
+            <span id="statusText">Online</span>
+        </div>
+        <div id="currentTemp" class="text-4xl sm:text-3xl md:text-4xl my-2">
+            Current Temperature: <span id="temperature">28.88</span>°C
+            <span id="tempStatusDot" class="status-dot orange-dot"></span>
+        </div>
+        <div id="targetTemp" class="text-4xl sm:text-3xl md:text-4xl my-2">
+            Target Temperature: <span id="targetTemperature">98</span>°C
+        </div>
+        <div id="tempSetContainer" class="flex flex-col items-center mt-4 mb-6">
+            <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required class="mb-4 p-3 text-3xl sm:text-2xl border border-gray-300 rounded text-center w-full max-w-xs md:max-w-sm lg:max-w-md">
+            <button onclick="setTemperature()" class="py-3 px-3 bg-gray-300 text-black rounded hover:bg-gray-400 text-3xl sm:text-2xl">Set Temperature</button>
+        </div>
     </div>
-    <div id="currentTemp">
-        Current Temperature: <span id="temperature">0</span>°C
-        <span id="tempStatusDot" class="status-dot orange-dot"></span>
-    </div>
-    <div id="targetTemp">Target Temperature: <span id="targetTemperature">0</span>°C</div>
-    <div id="tempSetContainer" style="display: flex; flex-direction: column; align-items: center;">
-        <input type="number" id="tempInput" min="90" max="98" placeholder="Target temp" required style="margin-bottom: 10px;">
-        <button onclick="setTemperature()">Set Temperature</button>
-    </div>
-    <div id="content">
-        <div id="tempChart" class="chart"></div>
+    <div class="w-full h-2/3 flex-grow flex flex-col items-center pt-5">
+        <div id="tempChart" class="w-4/5 h-full"></div>
     </div>
 </body>
 </html>
+
 """
 
 # Display
