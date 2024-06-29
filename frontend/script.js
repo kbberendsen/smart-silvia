@@ -149,7 +149,7 @@ function initializeChart() {
         y: [],
         mode: 'lines',
         name: 'Temperature (°C)',
-        line: {color: 'rgba(75, 192, 192, 1)'}
+        line: { color: 'rgba(75, 192, 192, 1)' }
     };
     const data = [trace];
     const layout = {
@@ -159,7 +159,8 @@ function initializeChart() {
             type: 'date'
         },
         yaxis: {
-            title: 'Temperature (°C)'
+            title: 'Temperature (°C)',
+            range: [0, 100] // Adjust y-axis to start from 0 and end at a reasonable value
         }
     };
     Plotly.newPlot('tempChart', data, layout);
@@ -170,10 +171,18 @@ function addTemperatureData(temp) {
     const now = new Date();
     timeData.push(now);
     temperatureData.push(temp);
-    Plotly.extendTraces('tempChart', {
+
+    // Remove data older than 60 seconds
+    const cutoffTime = new Date(now.getTime() - 60000);
+    while (timeData.length > 0 && timeData[0] < cutoffTime) {
+        timeData.shift();
+        temperatureData.shift();
+    }
+
+    Plotly.update('tempChart', {
         x: [timeData],
         y: [temperatureData]
-    }, [0]);
+    });
 }
 
 // Call initialLoad when the window loads
