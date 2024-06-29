@@ -5,7 +5,7 @@ import onewire
 import machine
 from ds18x20 import DS18X20
 from machine import Pin, I2C
-import ssd1306
+import lib.ssd1306 as ssd1306
 
 # P: if you’re not where you want to be, get there.
 # I: if you haven’t been where you want to be for a long time, get there faster

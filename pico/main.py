@@ -2,7 +2,9 @@ import network
 import asyncio
 from time import sleep
 from machine_control import handle_request, pid_loop
+from machine import Pin, I2C
 from secrets import WIFI_SSD, WIFI_PASSWORD
+import lib.ssd1306 as ssd1306
 
 # <canvas id="tempChart" width="400" height="200"></canvas>
 
@@ -53,22 +55,9 @@ print('Network config:', wlan.ifconfig())
 wlan_ip = wlan.ifconfig()[0]
 print(wlan_ip)
 
-# Check for OTA update
-def ota_update():
-    print('Checking for Updates...')
-    from lib.ota_updater import OTAUpdater
-    ota_updater = OTAUpdater('https://github.com/kbberendsen/smart-silvia', github_src_dir='lib', main_dir='pico', secrets_file="secrets.py")
-    has_updated = ota_updater.install_update_if_available()
-    if has_updated:
-        machine.reset()
-    else:
-        del ota_updater
-        gc.collect()
-
-try:
-    ota_update()
-except:
-    print('Updating failed')
+# Display
+i2c = I2C(0, sda=Pin(16), scl=Pin(17))
+display = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 # Serve Web Application
 async def serve_client(reader, writer):
@@ -89,9 +78,16 @@ async def serve_client(reader, writer):
     await writer.drain()  # Ensure all data is sent
     await writer.wait_closed()
 
-
 async def main():
     server = await asyncio.start_server(serve_client, '0.0.0.0', 80)
+
+    # Display IP on startup
+    display.fill(0)
+    display.text('IP Address', 15, 24, 1)
+    display.text(f'{wlan_ip}', 15, 33, 1)
+    display.show()
+    sleep(5)
+
     asyncio.create_task(pid_loop())  # Start the PID control loop
     while True:
         await asyncio.sleep(0.1)
