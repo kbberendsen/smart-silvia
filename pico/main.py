@@ -16,6 +16,7 @@ html = """
     <title>Smart Silvia</title>
     <link rel="icon" href="https://kbberendsen.github.io/smart-silvia/frontend/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="manifest" href="https://kbberendsen.github.io/smart-silvia/frontend/manifest.webmanifest">
     <script src="https://kbberendsen.github.io/smart-silvia/frontend/script.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
